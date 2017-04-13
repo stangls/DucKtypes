@@ -47,7 +47,7 @@ The code-generator searches for pairs of classes and interfaces where the class 
 Advantages
 ---
 * Use a Go-like interface system :D
-* Compared to other languages like for example Python or Go, DucKtypes still allows for normal static type-checking using interfaces. None of your code or code using a ducKtyped library automatically ducks your types into other interfaces without permission. So Kotlin stays of course type-safe. Only by importing the extension-methods, duck-typing is enabled (use ALT+ENTER or CMD+ENTER in IntelliJ IDEA).
+* Compared to other languages like for example Python or Go, DucKtypes still allows for normal static type-checking using interfaces. None of your code or code using a ducKtyped library automatically ducks any types into other interfaces "without permission". So Kotlin stays of course type-safe. Only by importing the extension-methods, duck-typing is enabled (use ALT+ENTER or CMD+ENTER in IntelliJ IDEA).
 
 
 Future plan
