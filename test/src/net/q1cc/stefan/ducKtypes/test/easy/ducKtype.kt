@@ -1,3 +1,9 @@
+
+
+// This file was dynamically created by the DucKtypes code generator
+
+// Methods for net.q1cc.stefan.ducKtypes.test.easy.Sea.enters
+
 fun net.q1cc.stefan.ducKtypes.test.easy.Sea.enters (arg0:net.q1cc.stefan.ducKtypes.test.easy.ActualFrog) = 
     enters(
         object: net.q1cc.stefan.ducKtypes.test.easy.Duck {
@@ -14,6 +20,9 @@ fun net.q1cc.stefan.ducKtypes.test.easy.Sea.enters (arg0:net.q1cc.stefan.ducKtyp
             }
         }
     )
+
+// Methods for net.q1cc.stefan.ducKtypes.test.easy.Sea.enterBoth
+
 fun net.q1cc.stefan.ducKtypes.test.easy.Sea.enterBoth (arg0:net.q1cc.stefan.ducKtypes.test.easy.ActualFrog, arg1:net.q1cc.stefan.ducKtypes.test.easy.Duck) = 
     enterBoth(
         object: net.q1cc.stefan.ducKtypes.test.easy.Duck {

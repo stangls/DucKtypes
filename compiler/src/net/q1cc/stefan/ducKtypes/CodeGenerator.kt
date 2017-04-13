@@ -39,6 +39,9 @@ object CodeGenerator {
         // search for duckable method-parameters
 
         outputFile.bufferedWriter().use { writer ->
+
+            writer.write("\n\n// This file was dynamically created by the DucKtypes code generator\n")
+
             javaClasses.forEach { extendedClass ->
 
                 extendedClass.declaredMethods.forEach { extendedMethod ->
@@ -60,6 +63,8 @@ object CodeGenerator {
 
                     // iterate over all possibile combinations of parameter-duckings
                     if (possibleDucktyings.isNotEmpty()) {
+
+                        writer.write("\n// Methods for ${extendedClass.canonicalName}.${extendedMethod.name}\n\n")
 
                         //println("$extendedClass.$extendedMethod possibly $possibleDucktyings")
 
