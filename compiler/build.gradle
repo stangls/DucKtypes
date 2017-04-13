@@ -36,7 +36,7 @@ defaultTasks 'run'
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': 'Linda Dangl online shop',
+        attributes 'Implementation-Title': 'DucKtypes compiler',
                 'Implementation-Version': version,
                 'Main-Class': mainClassName
     }
