@@ -14,7 +14,7 @@ interface Duck {
     fun quack()
 }
 object Sea {
-	fun enter( duck:Duck ) {
+    fun enter( duck:Duck ) {
     	duck.quack()
     }
 }
