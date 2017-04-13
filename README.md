@@ -8,7 +8,7 @@ Sometimes this is also known as "structural typing".
 How to use it
 ---
 
-Write some code working on an interfaces, for example:
+Write some using interfaces, for example:
 ```
 interface Duck {
     fun quack()
