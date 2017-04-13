@@ -3,7 +3,7 @@ DucKtypes
 
 Static duck-typing for Kotlin.<br />
 Filling the gap of Kotlin ducktyping without risking runtime-errors.<br />
-Sometimes also known as "structural typing".
+Sometimes this is also known as "structural typing".
 
 How to use it
 ---
@@ -43,6 +43,12 @@ How it works
 ---
 
 The code-generator searches for pairs of classes and interfaces where the class implements all methods of the interface. Based on this knowledge he scans all existing classes and creates extension-methods for those methods where types can be ducked. These generated extension-methods enable ducking by anonymous wrapper-objects.
+
+Advantages
+---
+* Use a Go-like interface system :D
+* Compared to other languages like for example Python or Go, DucKtypes still allows for normal static type-checking using interfaces. None of your code or code using a ducKtyped library automatically ducks your types into other interfaces without permission. So Kotlin stays of course type-safe. Only by importing the extension-methods, duck-typing is enabled (use ALT+ENTER or CMD+ENTER in IntelliJ IDEA).
+
 
 Future plan
 ---
