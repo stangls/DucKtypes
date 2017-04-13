@@ -22,9 +22,7 @@ object GenerateCode {
             ActualFrog::class.java
         )
 
-        CodeGenerator.createExtensionMethods(
-            File("test/src/net/q1cc/stefan/ducKtypes/test/easy/ducKtype.kt")
-        )
+        CodeGenerator.createExtensionMethods("test/src/net/q1cc/stefan/ducKtypes/test/easy/ducKtype.kt")
 
     }
 

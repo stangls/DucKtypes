@@ -126,6 +126,9 @@ object CodeGenerator {
         }
 
     }
+
+    fun createExtensionMethods(outputFile: String)
+        = createExtensionMethods(File(outputFile))
 }
 
 fun String.indent(spaces: Int): String
