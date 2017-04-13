@@ -7,10 +7,12 @@ import net.q1cc.stefan.ducKtypes.Duckable
  */
 object Sea {
 
+    /** makes the duck quack **/
     fun enters( d: Duck ){
         d.quack()
     }
 
+    /** makes both ducks quack **/
     fun enterBoth( d:Duck, d2:Duck ){
         d.quack()
         d2.quack()
