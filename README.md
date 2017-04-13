@@ -2,7 +2,8 @@ DucKtypes
 ===
 
 Static duck-typing for Kotlin.<br />
-Filling the gap of Kotlin ducktyping without risking runtime-errors.
+Filling the gap of Kotlin ducktyping without risking runtime-errors.<br />
+Sometimes also known as "structural typing".
 
 How to use it
 ---
