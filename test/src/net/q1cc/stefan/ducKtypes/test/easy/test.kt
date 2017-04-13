@@ -10,9 +10,15 @@ import enters
 fun main(args: Array<String>) {
 
     Sea.enters(ActualDuck())
+    // quack
     Sea.enters(ActualFrog())
+    // quaaak
 
     Sea.enterBoth(ActualDuck(),ActualFrog())
+    // quack
+    // quaak
     Sea.enterBoth(ActualFrog(),ActualFrog())
+    // quaak
+    // quaak
 
 }

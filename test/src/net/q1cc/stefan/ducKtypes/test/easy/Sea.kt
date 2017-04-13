@@ -7,14 +7,21 @@ import net.q1cc.stefan.ducKtypes.Duckable
  */
 object Sea {
 
-    fun enters( @Duckable d: Duck ){
+    fun enters( d: Duck ){
         d.quack()
     }
 
-    fun enterBoth( @Duckable d:Duck, @Duckable d2:Duck ){
+    fun enterBoth( d:Duck, d2:Duck ){
         d.quack()
         d2.quack()
     }
+
+    /*
+    // disallowed currently
+    fun enters( f: Frog ){
+        f.bork()
+    }
+    */
 
 }
 

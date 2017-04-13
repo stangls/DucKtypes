@@ -18,6 +18,7 @@ object GenerateCode {
         ClassRegistry.addAll(
             Sea::class.java,
             Duck::class.java,
+            Frog::class.java,
             ActualDuck::class.java,
             ActualFrog::class.java
         )

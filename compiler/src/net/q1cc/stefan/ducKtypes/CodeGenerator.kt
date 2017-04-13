@@ -2,12 +2,14 @@ package net.q1cc.stefan.ducKtypes
 
 import net.q1cc.stefan.missingInKotlin.allIndexed
 import java.io.File
+import java.lang.reflect.Method
+import java.util.*
 
 /**
  * Created by stefan on 13.04.17.
  */
 object CodeGenerator {
-    fun createExtensionMethods(outputFile: File) {
+    fun createExtensionMethods( outputFile: File, requireAnnotations: Boolean = false ) {
 
         val javaClasses = ClassRegistry.toSet()
 
@@ -19,11 +21,7 @@ object CodeGenerator {
                 val ducktypes = interfaces.filter { iface ->
                     iface != jClass &&
                     iface.methods.all { iMthd ->
-                        jClassMethods[iMthd.name]?.any { jcMthd ->
-                            iMthd.parameterTypes.allIndexed { idx, clazz ->
-                                jcMthd.parameterTypes[idx].isAssignableFrom(clazz)
-                            }
-                        } ?: false
+                        jClassMethods[iMthd.name]?.any { jcMthd -> jcMthd.implements(iMthd) } ?: false
                     }
 
                 }
@@ -44,11 +42,13 @@ object CodeGenerator {
 
             javaClasses.forEach { extendedClass ->
 
+                val extendedClassMethods = extendedClass.methods.groupBy { it.name }
+
                 extendedClass.declaredMethods.forEach { extendedMethod ->
 
                     val possibleDucktyings : List<List<Class<*>>> = extendedMethod.parameterTypes.mapIndexed{ paramIdx,paramType ->
                         listOf(paramType) +
-                        if (extendedMethod.parameterAnnotations[paramIdx].any { it.annotationClass==Duckable::class }){
+                        if ( !requireAnnotations || extendedMethod.parameterAnnotations[paramIdx].any { it.annotationClass==Duckable::class } ){
                             // this parameter should be duckable so we search for ducktyping classes
                             if (!paramType.isInterface){
                                 println("WARNING: $paramType is not an interface so duckability is limited to zero :-/ (maybe will change in later versions)")
@@ -64,7 +64,9 @@ object CodeGenerator {
                     // iterate over all possibile combinations of parameter-duckings
                     if (possibleDucktyings.isNotEmpty()) {
 
-                        writer.write("\n// Methods for ${extendedClass.canonicalName}.${extendedMethod.name}\n\n")
+                        val extendedMethodName = extendedMethod.name
+                        val extendedClassname = extendedClass.canonicalName
+                        writer.write("\n// Methods for $extendedClassname.$extendedMethodName\n\n")
 
                         //println("$extendedClass.$extendedMethod possibly $possibleDucktyings")
 
@@ -85,13 +87,20 @@ object CodeGenerator {
 
                         while (increaseCounter()) {
                             val permutation = possibleDucktyings.mapIndexed { idx, list -> list[counter[idx]] }
+
+                            if ( extendedClassMethods[extendedMethodName]?.any{ Arrays.equals(it.parameterTypes, permutation.toTypedArray()) } ?: false ){
+                                println("INFO: skipping generation of one extension-method $extendedClassname.$extendedMethodName because it exists already")
+                                println("      simple signature: ${extendedClass.simpleName}.${extendedMethodName}("+permutation.map{it.simpleName}.joinToString()+")")
+                                continue
+                            }
+
                             writer.write(
-                                "fun ${extendedClass.canonicalName}.${extendedMethod.name} ("+
+                                "fun $extendedClassname.$extendedMethodName ("+
                                 permutation.mapIndexed { idx, duckingClass ->
                                     extendedMethod.parameters[idx].name + ":" + duckingClass.canonicalName
                                 }.joinToString()+
                                 ") = \n"+
-                                "    ${extendedMethod.name}(\n" +
+                                "    $extendedMethodName(\n" +
                                 counter.mapIndexed{ idx, counter ->
                                     val param = extendedMethod.parameters[idx]
                                     val iface = param.type
@@ -128,8 +137,13 @@ object CodeGenerator {
     }
 
     fun createExtensionMethods(outputFile: String)
-        = createExtensionMethods(File(outputFile))
+        = createExtensionMethods(File(outputFile) )
 }
+
+private fun Method.implements(other: Method): Boolean =
+    other.parameterTypes.allIndexed { idx, clazz ->
+        this.parameterTypes[idx].isAssignableFrom(clazz)
+    }
 
 fun String.indent(spaces: Int): String
     = this.split('\r','\n').map {
