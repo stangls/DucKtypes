@@ -43,13 +43,14 @@ How it works
 
 The code-generator searches for pairs of classes and interfaces where the class implements all methods of the interface. Based on this knowledge he scans all existing classes and creates extension-methods for those methods where types can be ducked. These generated extension-methods enable ducking by anonymous wrapper-objects.
 
-Future plan:
+Future plan
 ---
 
  * find classes automatically
  * integrate code-generation into gradle build process
+ * solve conflicting-overload situations (see known problems)
 
-Known problems:
+Known problems
 ---
 
 * JavaDoc is not copied to generated extension-methods (yet?)
