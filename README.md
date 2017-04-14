@@ -61,7 +61,7 @@ Known problems
 ---
 
 * JavaDoc is not copied to generated extension-methods (yet?)
-* The codegenerator may generate `conflicting overloads` which are quite logical because ducktyping is a very loose concept.<br />
+* The codegenerator may generate `conflicting overloads` which are quite logical because ducktyping is a very loose concept which leads to methods accepting more types and thus maybe accepting the same types.<br />
   Compared to static typing, this error message corresponds to Kotlin's `overload resoultion ambiguity` like in this example:
 	```
     interface A
@@ -75,4 +75,5 @@ Known problems
 	    Receiver.doSth(Both) // overload resoultion ambiguity: it is not clear which method is correct
 	}
 	```
-    Suggestions for solutions are welcome.
+    The current solution is to use the annotation @Duckable for method parameters and the compiler-parameter `reguireAnnotations=true`
+    Other suggestions for solutions are welcome.
