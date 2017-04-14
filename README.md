@@ -55,7 +55,7 @@ Future plan
 
  * find classes automatically
  * integrate code-generation into gradle build process
- * -solve conflicting-overload situations (see known problems)-
+ * ~~solve conflicting-overload situations (see known problems)~~
 
 Known problems
 ---
