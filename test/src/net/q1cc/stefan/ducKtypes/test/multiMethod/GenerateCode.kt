@@ -1,7 +1,6 @@
-package net.q1cc.stefan.ducKtypes.test
+package net.q1cc.stefan.ducKtypes.test.multiMethod
 
 import net.q1cc.stefan.ducKtypes.*
-import net.q1cc.stefan.ducKtypes.test.easy.*
 import java.io.File
 
 /**
@@ -23,7 +22,10 @@ object GenerateCode {
             ActualFrog::class.java
         )
 
-        CodeGenerator.createExtensionMethods("test/src/net/q1cc/stefan/ducKtypes/test/easy/ducKtype.kt")
+        CodeGenerator.createExtensionMethods(
+            "test/src/net/q1cc/stefan/ducKtypes/test/multiMethod/ducKtype.kt",
+            requireAnnotations = true
+        )
 
     }
 

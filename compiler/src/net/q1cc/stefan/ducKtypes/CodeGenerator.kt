@@ -31,7 +31,7 @@ object CodeGenerator {
                 }
 
                 ducktypes.map { it.to(jClass) }
-            }.groupBy({ it.first },{ it.second })
+            }.groupBy({ it.first.canonicalName },{ it.second })
 
 
         // search for duckable method-parameters
@@ -46,15 +46,18 @@ object CodeGenerator {
 
                 extendedClass.declaredMethods.forEach { extendedMethod ->
 
+                    println(extendedMethod)
+
                     val possibleDucktyings : List<List<Class<*>>> = extendedMethod.parameterTypes.mapIndexed{ paramIdx,paramType ->
                         listOf(paramType) +
-                        if ( !requireAnnotations || extendedMethod.parameterAnnotations[paramIdx].any { it.annotationClass==Duckable::class } ){
-                            // this parameter should be duckable so we search for ducktyping classes
+                        if ( !requireAnnotations or extendedMethod.parameterAnnotations[paramIdx].any{ it is Duckable } ) {
+                            // this parameter should be ducktyped into so we search for ducktyping classes
+                            println("paramater $paramIdx should be ducked into")
                             if (!paramType.isInterface){
                                 println("WARNING: $paramType is not an interface so duckability is limited to zero :-/ (maybe will change in later versions)")
                                 listOf()
                             }else{
-                                classesDuckingInterfaces[paramType]?:listOf()
+                                classesDuckingInterfaces[paramType.canonicalName]?:listOf()
                             }
                         }else{
                             listOf()
@@ -136,8 +139,8 @@ object CodeGenerator {
 
     }
 
-    fun createExtensionMethods(outputFile: String)
-        = createExtensionMethods(File(outputFile) )
+    fun createExtensionMethods(outputFile: String, requireAnnotations: Boolean = false)
+        = createExtensionMethods(File(outputFile),requireAnnotations )
 }
 
 private fun Method.implements(other: Method): Boolean =
