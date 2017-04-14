@@ -10,9 +10,11 @@ import enters
 
 fun main(args: Array<String>) {
 
+    val  actualFrog = ActualFrog()
+
     Sea.enters(ActualDuck())
     // quack
-    Sea.enters(ActualFrog())
+    Sea.enters(actualFrog)
     // quaaak
 
     Sea.enterBoth(ActualDuck(), ActualFrog())
@@ -21,5 +23,15 @@ fun main(args: Array<String>) {
     Sea.enterBoth(ActualFrog(), ActualFrog())
     // quaak
     // quaak
+
+    Sea.enters(object : Frog {
+        override fun quack() {
+            actualFrog.quack()
+        }
+        override fun bork() {
+            actualFrog.bork()
+        }
+    })
+    // bork
 
 }

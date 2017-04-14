@@ -7,5 +7,5 @@ class ActualFrog {
     fun quack() {
         println("quaaak")
     }
-    fun bork() = println("borg")
+    fun bork() = println("bork")
 }
