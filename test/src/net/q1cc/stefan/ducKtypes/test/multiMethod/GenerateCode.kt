@@ -23,7 +23,7 @@ object GenerateCode {
         )
 
         CodeGenerator.createExtensionMethods(
-            "test/src/net/q1cc/stefan/ducKtypes/test/multiMethod/ducKtype.kt",
+            "test/src/net/q1cc/stefan/ducKtypes/test/multiMethod/ducKtypeMM.kt",
             requireAnnotations = true
         )
 
