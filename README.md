@@ -56,6 +56,8 @@ Future plan
  * find classes automatically
  * integrate code-generation into gradle build process
  * ~~solve conflicting-overload situations (see known problems)~~
+ * improved configurability (specify classes, packages and interfaces and/or interface-packages which are to be ducktyped)
+ * use KotlinPoet (was not available previously) instead of string concatenation.
 
 Known problems
 ---
